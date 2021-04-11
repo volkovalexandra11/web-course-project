@@ -3,7 +3,7 @@ Memory game
 Состав команды:
 1. Александра Волкова (volkovalexndra11)
 2. Сергей Луговых (aynug24)
-3. Айдар ШАйхуллин (ShaikhullinAidar)
+3. Айдар Шайхуллин (ShaikhullinAidar)
 4. Амина Шахтарина (shakhtarina)
 
 
