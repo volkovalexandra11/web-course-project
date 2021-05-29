@@ -1,5 +1,6 @@
 const FIELD = [];
-const alph = 'abcdefghijklmnopqrstuvwxyz';
+const BACK = 'Рубашка' + '\n' + 'Очень' + '\n' + 'Красивая'
+const alph = 'abcdefghijklmnopqrstuvwxyz'; //тут будет Object с картинками
 
 class Card {
 
@@ -7,9 +8,8 @@ class Card {
     static _used = new Set();
 
     constructor(fieldSize) {
-        // this._X = xCoord;
-        // this._Y = yCoord;
-        this.text = this.generateText(fieldSize);
+        this.innerText = this.generateText(fieldSize);
+        this.text = BACK;
     }
 
     generateText(fieldSize) {
@@ -30,8 +30,18 @@ class Card {
                 return alph[start];
             }
         }
-
     }
+
+    swapToFace() {
+        this.text = this.innerText;
+        return this;
+    }
+
+    swapToBack() {
+        this.text = BACK;
+        return this;
+    }
+
 }
 
 
@@ -49,10 +59,15 @@ function generateField(sizeX, sizeY) {
 generateField(4, 4);
 
 for (let i = 0; i < 4; i++) {
-    // for (let j = 0; j < 5; j++) {
-    //     console.log(FIELD[i][j].text);
-    // }
     console.log(FIELD[i].map(x => x.text));
-    // console.log('\n');
-    // FIELD.push(line);
+}
+
+
+for (let i = 0; i < 4; i++) {
+    console.log(FIELD[i].map(x => x.swapToFace()).map(x => x.text));
+}
+
+
+for (let i = 0; i < 4; i++) {
+    console.log(FIELD[i].map(x => x.swapToBack()).map(x => x.text));
 }
