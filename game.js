@@ -1,49 +1,8 @@
 const FIELD = [];
 const BACK = 'Рубашка' + '\n' + 'Очень' + '\n' + 'Красивая'
 const alph = 'abcdefghijklmnopqrstuvwxyz'; //тут будет Object с картинками
-
-class Card {
-
-    static _usedOnce = new Set();
-    static _used = new Set();
-
-    constructor(fieldSize) {
-        this.innerText = this.generateText(fieldSize);
-        this.text = BACK;
-    }
-
-    generateText(fieldSize) {
-        const possibleInds = [...Array(Math.floor(fieldSize / 2)).keys()];
-        let start = -1;
-
-        while (Card._used.has(start) || start === -1) {
-            let start = Math.floor(Math.random()* possibleInds.length);
-
-            if (!Card._usedOnce.has(start)) {
-                Card._usedOnce.add(start);
-                return alph[start];
-            }
-
-            if (Card._usedOnce.has(start) && !Card._used.has(start)) {
-                Card._used.add(start);
-                possibleInds.splice(start, 1);
-                return alph[start];
-            }
-        }
-    }
-
-    swapToFace() {
-        this.text = this.innerText;
-        return this;
-    }
-
-    swapToBack() {
-        this.text = BACK;
-        return this;
-    }
-
-}
-
+const OPENEDCARDS = new Set();
+let COUNT = 0;
 
 function generateField(sizeX, sizeY) {
     for (let i = 0; i < sizeX; i++) {
@@ -55,6 +14,21 @@ function generateField(sizeX, sizeY) {
         FIELD.push(line);
     }
 }
+
+function checkCards() {
+    const [first, second] = OPENEDCARDS;
+
+    if (first.text === second.text) {
+        COUNT += 5;
+    }
+
+    else {
+        COUNT -= 2;
+    }
+
+    OPENEDCARDS.clear();
+}
+
 
 generateField(4, 4);
 
