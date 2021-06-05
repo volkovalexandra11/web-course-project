@@ -17,7 +17,7 @@
 
 .memoryGame {
     height: 90%;
-    width: 100vh;
+    width: calc(calc((100vh)*var(--fieldWidth)*0.8)/calc(var(--fieldHeight)));
     margin: auto;
     display: flex;
     flex-flow: row wrap;

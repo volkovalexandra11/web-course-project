@@ -2,8 +2,8 @@
 
 // const Game = require('./game');
 
-const height = 5;
-const width = 4;
+const height = 4;
+const width = 5;
 
 document.documentElement.style.setProperty('--fieldWidth', width.toString());
 document.documentElement.style.setProperty('--fieldHeight', height.toString());
