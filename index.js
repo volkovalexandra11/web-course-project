@@ -2,8 +2,8 @@
 
 // const Game = require('./game');
 
-const height = 4;
-const width = 5;
+const height = 5;
+const width = 4;
 
 document.documentElement.style.setProperty('--fieldWidth', width.toString());
 document.documentElement.style.setProperty('--fieldHeight', height.toString());
@@ -102,6 +102,9 @@ cards.forEach(card => {
     card.addEventListener("click", onCardClick);
 });
 
+window.onload = () => {
+    startTimer();
+}
 
 // <div className="card">
 //     <img src="images/front.png" alt="front" className="front">

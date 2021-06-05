@@ -4,6 +4,8 @@ class Game {
 
     field = undefined;
 
+    score = 0;
+
     flippedCard = undefined;
     openedCards = new Set();
 
