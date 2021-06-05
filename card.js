@@ -1,9 +1,10 @@
 class Card {
     id = undefined;
-    isOpened = false;
+    coords = undefined;
 
-    constructor(id) {
+    constructor(id, coords) {
         this.id = id;
+        this.coords = coords;
     }
 }
 

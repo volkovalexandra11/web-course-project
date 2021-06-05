@@ -4,8 +4,7 @@ class Game {
 
     field = undefined;
 
-    flippedFirst = undefined;
-
+    flippedCard = undefined;
     openedCards = new Set();
 
     constructor(height, width) {
@@ -18,8 +17,47 @@ class Game {
         this.field = generateField(width, height);
     }
 
-    tryFlip(x, y) {
+    flip(x, y) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
+            throw new Error(`Got coords (${x},${y}) outside of field size (${this.width}, ${this.height})`);
+        }
+        const flippingCard = this.field[y][x];
 
+        if (this.isFlipped(x, y)) {
+            return { alreadyFlipped: true };
+        }
+
+        if (this.flippedCard === undefined) {
+            this.flippedCard = flippingCard;
+            return { firstFlipped: true };
+        }
+
+        const flippedCard = this.flippedCard;
+        this.flippedCard = undefined;
+
+        if (flippedCard.id !== flippingCard.id) {
+            return { secondFlipIncorrect: true, otherCardCoords: flippedCard.coords };
+        }
+
+        this.addToOpened(flippingCard);
+        this.addToOpened(flippedCard);
+        return { secondFlipCorrect: true };
+    }
+
+    isFlipped(x, y) {
+        if (this.openedCards.has(y * this.width + x)) {
+            return true;
+        }
+        if (this.flippedCard === undefined) {
+            return false;
+        }
+        const [flippedX, flippedY] = this.flippedCard.coords;
+        return x === flippedX && y === flippedY;
+    }
+
+    addToOpened(card) {
+        const [x, y] = card.coords;
+        this.openedCards.add(y * this.width + x);
     }
 }
 
@@ -50,15 +88,17 @@ function generateField(width, height) {
 
     const allCoords = Array.from(
         {length: width * height},
-        (_, i) => [Math.floor(i / width), i % width]
+        (_, i) => [i % width, Math.floor(i / width)]
     );
 
     for (let cardInd = 0; cardInd < width * height; cardInd++) {
-        [x, y] = allCoords[cardInd];
-        field[x][y] = new Card(allIds[cardInd]);
+        const [x, y] = allCoords[cardInd];
+        field[y][x] = new Card(allIds[cardInd], allCoords[cardInd]);
     }
     return field;
 }
+
+//export default Game;
 
 // const FIELD = [];
 // const BACK = 'Рубашка' + '\n' + 'Очень' + '\n' + 'Красивая'
