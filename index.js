@@ -68,6 +68,7 @@ function flipCard(x, y) {
     }
 }
 
+const score = document.querySelector('#score');
 function onCardClick(e) {
     const card = e.currentTarget;
     console.log(card);
@@ -75,6 +76,7 @@ function onCardClick(e) {
     console.log(card.dataset);
     console.log(x, y);
     const flipRes = game.flip(x, y);
+    score.value = game.score;
     console.log(flipRes);
     if (flipRes.alreadyFlipped) {
         return;
@@ -103,7 +105,10 @@ cards.forEach(card => {
 });
 
 window.onload = () => {
-    startTimer();
+    const timerForm = document.querySelector('#timer');
+    startTimer(ts => {
+        timerForm.value = `${Math.floor(ts / 60)}:${(ts % 60).toString().padStart(2, '0')}`;
+    });
 }
 
 // <div className="card">

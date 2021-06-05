@@ -38,9 +38,11 @@ class Game {
         this.flippedCard = undefined;
 
         if (flippedCard.id !== flippingCard.id) {
+            this.score = Math.max(0, this.score - 20);
             return { secondFlipIncorrect: true, otherCardCoords: flippedCard.coords };
         }
 
+        this.score += Math.ceil(1440 / currT);
         this.addToOpened(flippingCard);
         this.addToOpened(flippedCard);
         return { secondFlipCorrect: true };

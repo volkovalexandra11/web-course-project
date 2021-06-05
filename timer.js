@@ -1,14 +1,15 @@
-const timerForm = document.querySelector('#timer');
+let onTickCallback;
 let currT = 0;
 let timerId;
 
-function onTick() {
+function tick() {
     currT++;
-    timerForm.value = `${Math.floor(currT / 60)}:${(currT % 60).toString().padStart(2, '0')}`;
+    onTickCallback(currT);
 }
 
-function startTimer() {
-    timerId = setInterval(onTick, 1000);
+function startTimer(onTick) {
+    timerId = setInterval(tick, 1000);
+    onTickCallback = onTick;
 }
 
 function stopTimer() {
