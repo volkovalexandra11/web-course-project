@@ -1,10 +1,10 @@
 import Game from "./game.mjs";
 import Timer from "./timer.mjs";
 import {
-        createAlphabetCardTemplates,
-        createCards,
-        refillCardWrapper,
-    } from "./cardGeneration.mjs";
+    createAlphabetCardTemplates,
+    createCards, createGradientCardTemplates,
+    refillCardWrapper,
+} from "./cardGeneration.mjs";
 
 function fillSelectRange(select, start, end, defaultValue) {
     for (let optionValue = start; optionValue < end; optionValue++) {
@@ -45,7 +45,7 @@ const timer = new Timer(ts => {
 
 const score = document.querySelector('#score');
 
-let currUser;
+let currUser = null;
 
 function flipCard(x, y) {
     const card = cards[y * width + x];
@@ -100,10 +100,11 @@ function onWin() {
     currUser = prompt(
         `You won! Time: ${timer.currT} seconds. Score: ${game.score}.\n` +
         'You can enter your username to add score to leaderboard',
-        currUser
+        currUser !== null ? currUser : ''
     );
 
-    if (currUser !== undefined) {
+    console.log(currUser);
+    if (currUser !== null) {
         sendScore(game.score);
     }
 }
@@ -133,7 +134,8 @@ function startGame() {
 
     game = new Game(timer, height, width);
 
-    const cardTemplates = createAlphabetCardTemplates(height * width);
+    // const cardTemplates = createAlphabetCardTemplates(height * width);
+    const cardTemplates = createGradientCardTemplates(height * width)
     cards = createCards(game, cardTemplates, onCardClick, height, width);
     refillCardWrapper(cards);
 
