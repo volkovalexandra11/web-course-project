@@ -65,6 +65,7 @@ function onCardClick(e) {
     const [x, y] = [parseInt(card.dataset.x), parseInt(card.dataset.y)];
     const flipRes = game.flip(x, y);
     score.value = game.score;
+    score.style.width = score.value.length * 18 + 'px';
 
     console.log(flipRes);
 
