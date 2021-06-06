@@ -1,8 +1,8 @@
 import Game from "./game.mjs";
 import Timer from "./timer.mjs";
 import {
-    createAlphabetCardTemplates,
-    createCards, createGradientCardTemplates,
+    createCardTemplates,
+    createCards,
     refillCardWrapper,
 } from "./cardGeneration.mjs";
 
@@ -46,6 +46,12 @@ const timer = new Timer(ts => {
 const score = document.querySelector('#score');
 
 let currUser = null;
+
+const deckSizes = {
+    'teachers': 20,
+    'alphabet': 52,
+    'stuff': 20
+};
 
 function flipCard(x, y) {
     const card = cards[y * width + x];
@@ -129,13 +135,36 @@ async function sendScore(score) {
     console.log(resp);
 }
 
+function tryValidateDeck(deckName, fieldSize) {
+    const errorMsgs = [];
+    if (fieldSize % 2 !== 0) {
+        errorMsgs.push("Can't create correct matching pairs. Height or width should be an even number!");
+    }
+    if (deckSizes[deckName] < fieldSize) {
+        errorMsgs.push(`Only ${deckSizes[deckName]} cards are available in this deck.`);
+    }
+    if (errorMsgs.length > 0) {
+        alert(errorMsgs.join('\n'));
+        return false;
+    }
+    return true;
+}
+
 function startGame() {
-    resetFieldSize();
+    const newHeight = parseInt(document.querySelector('#heightSelect').value);
+    const newWidth = parseInt(document.querySelector('#widthSelect').value);
+    const deckName = document.querySelector('#deckSelect').value;
+
+    if (!tryValidateDeck(deckName, newWidth * newHeight)) {
+        return;
+    }
+
+    setHeight(newHeight);
+    setWidth(newWidth);
 
     game = new Game(timer, height, width);
 
-    // const cardTemplates = createAlphabetCardTemplates(height * width);
-    const cardTemplates = createGradientCardTemplates(height * width)
+    const cardTemplates = createCardTemplates(deckName, height * width);
     cards = createCards(game, cardTemplates, onCardClick, height, width);
     refillCardWrapper(cards);
 
@@ -143,22 +172,6 @@ function startGame() {
     timerForm.value = '0:00';
 
     timer.resetTimer();
-}
-
-function resetFieldSize() {
-    const newHeight = parseInt(document.querySelector('#heightSelect').value);
-    const newWidth = parseInt(document.querySelector('#widthSelect').value);
-    if (newHeight * newWidth % 2 !== 0) {
-        alert("Can't create correct matching pairs. Height or width should be an even number!");
-        return;
-    }
-    if (newHeight * newWidth > 52) {
-        alert("There are 52 cards currently available! Please select a smaller field.");
-        return;
-    }
-
-    setHeight(newHeight);
-    setWidth(newWidth);
 }
 
 window.onload = () => {

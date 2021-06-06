@@ -11,7 +11,7 @@
 
 .fieldHeight,
 .fieldWidth,
-.theme,
+.deck,
 .restart-button,
 .leader {
     margin-top: 10px;
@@ -72,6 +72,7 @@
 .memoryGame {
     height: 90%;
     width: calc(calc((100vh)*var(--fieldWidth)*0.8)/calc(var(--fieldHeight)));
+    /*width: 55%;*/
     margin: auto;
     display: flex;
     flex-flow: row wrap;

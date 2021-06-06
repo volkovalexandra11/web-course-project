@@ -1,11 +1,22 @@
+const templateGenerators = {
+    'alphabet': createAlphabetCardTemplates,
+    'gradients': createGradientCardTemplates,
+    'stuff': createFiitStuffTemplates
+};
+
 const backImg = 'images/back.jpg';
 const transparentImg = 'images/Transparent.png';
 
-export function createAlphabetCardTemplates(fieldSize) {
+export function createCardTemplates(deckName, fieldSize) {
+    const templateGenerator = templateGenerators[deckName];
+    return templateGenerator(fieldSize);
+}
+
+function createAlphabetCardTemplates(fieldSize) {
     return [...'ABCDEFGHIJKLMOPQRSTUVWXYZ']
         .slice(0, Math.floor(fieldSize / 2))
         .map(letter => `images/${letter}.png`)
-        .map((letterImg, index) => createCard(backImg, letterImg));
+        .map(letterImg => createCard(backImg, letterImg));
 }
 
 const gradientColors = [
@@ -51,8 +62,25 @@ const gradientColors = [
     '#000080',
 ]
 
-export function createGradientCardTemplates(fieldSize) {
+function createGradientCardTemplates(fieldSize) {
     return Array.from( { length: Math.floor(fieldSize / 2) }, _ => createGradCard());
+}
+
+function createFiitStuffTemplates(fieldSize) {
+    return [
+            'ОСИ.jpg',
+            'ЯТП.jpg',
+            'МАТАН.jpg',
+            'АЛГЕМ.png',
+            'ХАКЕРДОМ.jpg',
+            'КОНТУР.jpg',
+            'ФИИТ.jpg',
+            'УРФУ.jpg',
+            'МАТМЕХ.jpg',
+            'ПИТОН.jpg',
+        ].slice(0, Math.floor(fieldSize / 2))
+        .map(imgName => 'images/' + imgName)
+        .map(faceImg => createCard(backImg, faceImg));
 }
 
 function randomDoubleRange(start, end) {
