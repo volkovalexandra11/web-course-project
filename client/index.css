@@ -45,9 +45,9 @@
 
 .wrapper .timer {
     background: white;
-    border: white;
+    border-color: black;
     border-radius: 5px;
-    width: 60px;
+    width: 63px;
     position: absolute;
     color: black;
     left: 20px;
@@ -58,9 +58,9 @@
 
 .wrapper .score {
     background: white;
-    border: white;
+    border-color: black;
     border-radius: 5px;
-    width: 18px;
+    width: 21px;
     position: absolute;
     color: black;
     right: 40px;
