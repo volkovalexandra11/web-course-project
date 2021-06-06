@@ -4,21 +4,17 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="index.css">
     <title>Memory Game</title>
+    <script type="module" src="index.mjs"></script>
 </head>
 <body>
     <input name="timer" id="timer" value="0:00" disabled>
     <input name="score" id="score" value="0" disabled>
     <select name="fieldHeight" id="heightSelect"></select>
     <select name="fieldWidth" id="widthSelect"></select>
-    <button name="reset" onclick="startGame()">Restart</button>
+    <button name="reset" id="restartBtn">Restart</button>
     <div class="wrapper">
         <section class="memoryGame">
         </section>
     </div>
-    <script src = timer.js></script>
-    <script src = card.js></script>
-    <script src = game.js></script>
-    <script src = cardGeneration.js></script>
-    <script src = index.js></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-function createAlphabetCardTemplates(fieldSize) {
+export function createAlphabetCardTemplates(fieldSize) {
     const backImg = 'images/back.jpg';
     return [...'ABCDEFGHIJKLMOPQRSTUVWXYZ']
         .slice(0, Math.floor(fieldSize))
@@ -28,7 +28,7 @@ function createCard(index, backImg, faceImg) {
     return card;
 }
 
-function createCards(game, cardTemplates, height, width) {
+export function createCards(game, cardTemplates, onCardClick, height, width) {
     const newCards = [];
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
@@ -39,7 +39,7 @@ function createCards(game, cardTemplates, height, width) {
             newCard.dataset.y = y.toString();
 
             newCard.addEventListener("mousedown", onCardClick);
-            newCard.addEventListener('dragstart', () => false );
+            // newCard.addEventListener('dragstart', () => false );
 
             newCards.push(newCard);
             //newCard.prepend(fieldId.toString());
@@ -48,7 +48,7 @@ function createCards(game, cardTemplates, height, width) {
     return newCards;
 }
 
-function refillCardWrapper(cards) {
+export function refillCardWrapper(cards) {
     const cardWrapper = document.querySelector('.memoryGame');
     cardWrapper.innerHTML = '';
 
@@ -56,3 +56,5 @@ function refillCardWrapper(cards) {
         cardWrapper.append(card);
     }
 }
+
+//export default (refillCardWrapper, createCards);

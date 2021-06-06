@@ -1,3 +1,5 @@
+import Card from "./card.mjs";
+
 class Game {
     height = undefined;
     width = undefined;
@@ -6,11 +8,12 @@ class Game {
 
     score = 0;
     isOver = false;
+    timer = undefined;
 
     flippedCard = undefined;
     openedCards = new Set();
 
-    constructor(height, width) {
+    constructor(timer, height, width) {
         if (width * height % 2 !== 0) {
             throw new Error(`Field should have even number of cards, got size ${width}x${height}`);
         }
@@ -18,6 +21,7 @@ class Game {
         this.height = height;
         this.width = width;
         this.field = generateField(width, height);
+        this.timer = timer;
     }
 
     flip(x, y) {
@@ -43,7 +47,7 @@ class Game {
             return { secondFlipIncorrect: true, otherCardCoords: flippedCard.coords };
         }
 
-        this.score += Math.ceil(1440 / (currT + 1));
+        this.score += Math.ceil(1440 / (this.timer.currT + 1));
         this.addToOpened(flippingCard);
         this.addToOpened(flippedCard);
 
@@ -105,51 +109,4 @@ function generateField(width, height) {
     return field;
 }
 
-//export default Game;
-
-// const FIELD = [];
-// const BACK = 'Рубашка' + '\n' + 'Очень' + '\n' + 'Красивая'
-// const OPENEDCARDS = new Set();
-// let COUNT = 0;
-//
-// function generateField(width, height) {
-//     for (let i = 0; i < height; i++) {
-//         const line = [];
-//         for (let j = 0; j < height; j++) {
-//             const card = new Card();
-//             line.push(card);
-//         }
-//         FIELD.push(line);
-//     }
-// }
-//
-// function checkCards() {
-//     const [first, second] = OPENEDCARDS;
-//
-//     if (first.text === second.text) {
-//         COUNT += 5;
-//     }
-//
-//     else {
-//         COUNT -= 2;
-//     }
-//
-//     OPENEDCARDS.clear();
-// }
-//
-//
-// generateField(4, 4);
-//
-// for (let i = 0; i < 4; i++) {
-//     console.log(FIELD[i].map(x => x.text));
-// }
-//
-//
-// for (let i = 0; i < 4; i++) {
-//     console.log(FIELD[i].map(x => x.swapToFace()).map(x => x.text));
-// }
-//
-//
-// for (let i = 0; i < 4; i++) {
-//     console.log(FIELD[i].map(x => x.swapToBack()).map(x => x.text));
-// }
+export default Game;

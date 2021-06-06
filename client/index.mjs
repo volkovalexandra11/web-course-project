@@ -1,3 +1,11 @@
+import Game from "./game.mjs";
+import Timer from "./timer.mjs";
+import {
+        createAlphabetCardTemplates,
+        createCards,
+        refillCardWrapper,
+    } from "./cardGeneration.mjs";
+
 function fillSelectRange(select, start, end, defaultValue) {
     for (let optionValue = start; optionValue < end; optionValue++) {
         const option = document.createElement('option');
@@ -31,6 +39,10 @@ let game;
 let cards = [];
 
 const timerForm = document.querySelector('#timer');
+const timer = new Timer(ts => {
+    timerForm.value = `${Math.floor(ts / 60)}:${(ts % 60).toString().padStart(2, '0')}`;
+});
+
 const score = document.querySelector('#score');
 
 function flipCard(x, y) {
@@ -79,24 +91,23 @@ function onCardClick(e) {
 }
 
 function onWin() {
-    stopTimer();
-    alert(`You won! Time: ${currT} seconds Score: ${game.score}`);
+    timer.stopTimer();
+    alert(`You won! Time: ${timer.currT} seconds. Score: ${game.score}.`);
 }
 
 function startGame() {
     resetFieldSize();
 
-    game = new Game(height, width);
+    game = new Game(timer, height, width);
 
     const cardTemplates = createAlphabetCardTemplates(height * width);
-    cards = createCards(game, cardTemplates, height, width);
+    cards = createCards(game, cardTemplates, onCardClick, height, width);
     refillCardWrapper(cards);
 
     score.value = 0;
     timerForm.value = '0:00';
-    resetTimer(ts => {
-        timerForm.value = `${Math.floor(ts / 60)}:${(ts % 60).toString().padStart(2, '0')}`;
-    });
+
+    timer.resetTimer();
 }
 
 function resetFieldSize() {
@@ -122,8 +133,6 @@ window.onload = () => {
     startGame();
 }
 
-
-// <div className="card">
-//     <img src="images/front.png" alt="front" className="front">
-//     <img src="images/back.jpg" alt="back" className="back">
-// </div>
+window.onclick = () => {
+    return true;
+}
