@@ -1,0 +1,25 @@
+{
+  "name": "web-course-project",
+  "version": "1.0.0",
+  "description": "memory game",
+  "main": "server.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.mjs",
+    "dev": "nodemon --experimental-modules server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volkovalexandra11/web-course-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/volkovalexandra11/web-course-project/issues"
+  },
+  "homepage": "https://github.com/volkovalexandra11/web-course-project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}

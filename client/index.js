@@ -33,63 +33,6 @@ let cards = [];
 const timerForm = document.querySelector('#timer');
 const score = document.querySelector('#score');
 
-const backImg = 'images/back.jpg';
-
-const cardTemplates = [...'ABCDEFGHIJKLMOPQRSTUVWXYZ']
-    .slice(0, Math.floor(height * width))
-    .map(letter => `images/${letter}.png`)
-    .map((letterImg, index) => createCard(index, backImg, letterImg));
-
-function createCardSide(img, isBack) {
-    const cardFace = document.createElement('img');
-    const sideStr = isBack ? 'back' : 'face';
-
-    cardFace.src = img;
-    cardFace.alt = sideStr;
-    cardFace.className = sideStr;
-
-    return cardFace;
-}
-
-function createCard(index, backImg, faceImg) {
-    const card = document.createElement('div');
-
-    const [back, face] = [createCardSide(backImg, true), createCardSide(faceImg, false)];
-    card.append(back, face);
-
-    card.className = 'card';
-
-    return card;
-}
-
-function createCards(game, cardTemplates) {
-    const newCards = [];
-    for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-            const fieldId = game.field[y][x].id;
-            const newCard = cardTemplates[fieldId].cloneNode(true);
-
-            newCard.dataset.x = x.toString();
-            newCard.dataset.y = y.toString();
-            newCard.addEventListener("mousedown", onCardClick);
-
-            newCards.push(newCard);
-
-            //newCard.prepend(fieldId.toString());
-        }
-    }
-    return newCards;
-}
-
-function refillCardWrapper(cards) {
-    const cardWrapper = document.querySelector('.memoryGame');
-    cardWrapper.innerHTML = '';
-
-    for (const card of cards) {
-        cardWrapper.append(card);
-    }
-}
-
 function flipCard(x, y) {
     const card = cards[y * width + x];
     if (!card.classList.contains('flip')) {
@@ -98,7 +41,6 @@ function flipCard(x, y) {
         card.classList.remove("flip");
     }
 }
-
 
 function onCardClick(e) {
     const card = e.currentTarget;
@@ -145,7 +87,9 @@ function startGame() {
     resetFieldSize();
 
     game = new Game(height, width);
-    cards = createCards(game, cardTemplates);
+
+    const cardTemplates = createAlphabetCardTemplates(height * width);
+    cards = createCards(game, cardTemplates, height, width);
     refillCardWrapper(cards);
 
     score.value = 0;
