@@ -13,7 +13,7 @@
 .fieldWidth,
 .theme,
 .restart-button,
-.leader{
+.leader {
     margin-top: 10px;
     margin-left: 5px;
     height: 30px;
@@ -22,6 +22,10 @@
     border-radius: 5px;
     box-shadow: 1px 1px 2px #999;
     background: #eee;
+}
+
+.leader {
+    width: 150px;
 }
 
 .restart-button {
