@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LeaderBoard</title>
+    <link rel="stylesheet" href="leaderboard.css">
+</head>
+<body>
+<table border="4" bordercolor="#000000" cellspacing="0" cellpadding="10">
+
+    <thead>
+    <tr>
+        <th scope="col">Place</th>
+        <th scope="col">Name</th>
+        <th scope="col">Score</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{#each userScores}}
+    <tr>
+        <td> {{place}} </td>
+        <td> {{user}} </td>
+        <td> {{score}} </td>
+    </tr>
+    {{/each}}
+    </tbody>
+
+</table>
+
+<a href="/"><button class="back">Back to start</button></a>
+</body>
+</html>
