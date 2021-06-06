@@ -55,13 +55,15 @@ function flipCard(x, y) {
 }
 
 function onCardClick(e) {
+    if (game.isOver) {
+        return;
+    }
+
     const card = e.currentTarget;
-    console.log(card);
     const [x, y] = [parseInt(card.dataset.x), parseInt(card.dataset.y)];
-    console.log(card.dataset);
-    console.log(x, y);
     const flipRes = game.flip(x, y);
     score.value = game.score;
+
     console.log(flipRes);
 
     if (game.isOver) {
@@ -132,8 +134,4 @@ window.onload = () => {
     document.querySelector('#restartBtn').addEventListener('click', startGame);
 
     startGame();
-}
-
-window.onclick = () => {
-    return true;
 }
