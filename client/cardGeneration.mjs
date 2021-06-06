@@ -39,7 +39,7 @@ export function createCards(game, cardTemplates, onCardClick, height, width) {
             newCard.dataset.y = y.toString();
 
             newCard.addEventListener("mousedown", onCardClick);
-            newCard.addEventListener("dragstart", () => false ); // TODO
+            newCard.addEventListener("dragstart", e => e.preventDefault()); // TODO
 
             newCards.push(newCard);
             //newCard.prepend(fieldId.toString());
@@ -56,5 +56,3 @@ export function refillCardWrapper(cards) {
         cardWrapper.append(card);
     }
 }
-
-//export default (refillCardWrapper, createCards);

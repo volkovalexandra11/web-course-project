@@ -45,6 +45,8 @@ const timer = new Timer(ts => {
 
 const score = document.querySelector('#score');
 
+let currUser;
+
 function flipCard(x, y) {
     const card = cards[y * width + x];
     if (!card.classList.contains('flip')) {
@@ -94,7 +96,35 @@ function onCardClick(e) {
 
 function onWin() {
     timer.stopTimer();
-    alert(`You won! Time: ${timer.currT} seconds. Score: ${game.score}.`);
+    currUser = prompt(
+        `You won! Time: ${timer.currT} seconds. Score: ${game.score}.\n` +
+        'You can enter your username to add score to leaderboard',
+        currUser
+    );
+
+    if (currUser !== undefined) {
+        sendScore(game.score);
+    }
+}
+
+async function sendScore(score) {
+    const resp = await fetch('/api/postScore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: currUser,
+            score: score
+        })
+    });
+
+    if (resp.ok) {
+        alert('Score has been successfully saved!');
+    } else {
+        alert('There has been an error while saving score. Please report it to us');
+    }
+    console.log(resp);
 }
 
 function startGame() {
