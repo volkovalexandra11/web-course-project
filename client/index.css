@@ -10,9 +10,35 @@
 }
 
 .wrapper {
-    height: 100vh;
+    height: calc(100vh - 20px);
     display: flex;
     /*background-color: #2a5f3a;*/
+}
+
+.wrapper .timer {
+    background: white;
+    border: white;
+    border-radius: 10%;
+    width: 60px;
+    position: absolute;
+    color: black;
+    left: 20px;
+    top: 40px;
+    font-size:30px;
+    z-index: 2;
+}
+
+.wrapper .score {
+    background: white;
+    border: white;
+    border-radius: 10%;
+    width: 70px;
+    position: absolute;
+    color: black;
+    right: 40px;
+    top: 40px;
+    font-size:30px;
+    z-index: 2;
 }
 
 .memoryGame {
