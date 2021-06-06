@@ -12,7 +12,8 @@
 .fieldHeight,
 .fieldWidth,
 .theme,
-.restart-button {
+.restart-button,
+.leader {
     margin-top: 10px;
     margin-left: 5px;
     height: 30px;
@@ -21,6 +22,10 @@
     border-radius: 5px;
     box-shadow: 1px 1px 2px #999;
     background: #eee;
+}
+
+.leader {
+    width: 150px;
 }
 
 .restart-button {
@@ -40,9 +45,9 @@
 
 .wrapper .timer {
     background: white;
-    border: white;
+    border-color: black;
     border-radius: 5px;
-    width: 60px;
+    width: 63px;
     position: absolute;
     color: black;
     left: 20px;
@@ -53,9 +58,9 @@
 
 .wrapper .score {
     background: white;
-    border: white;
+    border-color: black;
     border-radius: 5px;
-    width: 18px;
+    width: 21px;
     position: absolute;
     color: black;
     right: 40px;
