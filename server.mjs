@@ -33,3 +33,4 @@ app.post('/api/postScore', (req, res) => {
     console.log(leaderboard);
     res.sendStatus(200).end();
 });
+
