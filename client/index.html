@@ -7,9 +7,14 @@
     <script type="module" src="index.mjs"></script>
 </head>
 <body>
-    <select name="fieldHeight" id="heightSelect"></select>
-    <select name="fieldWidth" id="widthSelect"></select>
-    <button name="reset" id="restartBtn">Restart</button>
+    <select class="fieldHeight" name="fieldHeight" id="heightSelect"></select>
+    <select class="fieldWidth" name="fieldWidth" id="widthSelect"></select>
+    <select class="theme" name="theme" id="theme">
+        <option value="value1">Преподы</option>
+        <option value="value2">Предметы</option>
+        <option value="value3" selected>Случайные карты</option>
+    </select>
+    <button class="restart-button" name="reset" id="restartBtn">Restart</button>
     <div class="wrapper">
         <input class="timer" name="timer" id="timer" value="0:00" disabled>
         <input class="score" name="score" id="score" value="0" disabled>
