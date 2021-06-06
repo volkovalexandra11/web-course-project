@@ -12,12 +12,13 @@ html {
 table {
     margin-left: auto;
     margin-right: auto;
+    background-color: #ffe4c4;
 }
 
 .back {
-    position: fixed;
-    background-color: #000000;
-    color: #FFFFFF;
+    position: absolute;
+    background-color: #ffe4c4;
+    color: black;
     padding: 10px;
     border-radius: 10px;
     -moz-border-radius: 10px;

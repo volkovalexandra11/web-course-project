@@ -21,7 +21,7 @@
     font-size: 20px;
     border-radius: 5px;
     box-shadow: 1px 1px 2px #999;
-    background: #eee;
+    background: #ffe4c4;
 }
 
 .leader {
@@ -44,7 +44,7 @@
 }
 
 .wrapper .timer {
-    background: white;
+    background: #ffe4c4;
     border-color: black;
     border-radius: 5px;
     width: 63px;
@@ -57,7 +57,7 @@
 }
 
 .wrapper .score {
-    background: white;
+    background: #ffe4c4;
     border-color: black;
     border-radius: 5px;
     width: 21px;
@@ -104,7 +104,7 @@
     padding: 5%;
     position: absolute;
     border-radius: 5%;
-    background-color: #ADAFAF;
+    background-color: black;
     backface-visibility: hidden;
 }
 
