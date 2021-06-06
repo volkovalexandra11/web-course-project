@@ -12,7 +12,7 @@
 .wrapper {
     height: 100vh;
     display: flex;
-    background-color: #2a5f3a;
+    /*background-color: #2a5f3a;*/
 }
 
 .memoryGame {
@@ -56,4 +56,15 @@
 
 .face {
     transform: rotateY(180deg);
+}
+
+html {
+    background-image: url(images/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
