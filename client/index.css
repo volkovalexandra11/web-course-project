@@ -12,7 +12,8 @@
 .fieldHeight,
 .fieldWidth,
 .theme,
-.restart-button {
+.restart-button,
+.leader{
     margin-top: 10px;
     margin-left: 5px;
     height: 30px;
