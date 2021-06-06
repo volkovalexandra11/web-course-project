@@ -1,0 +1,26 @@
+html {
+    background-image: url(images/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
