@@ -5,6 +5,7 @@ class Game {
     field = undefined;
 
     score = 0;
+    isOver = false;
 
     flippedCard = undefined;
     openedCards = new Set();
@@ -42,9 +43,11 @@ class Game {
             return { secondFlipIncorrect: true, otherCardCoords: flippedCard.coords };
         }
 
-        this.score += Math.ceil(1440 / currT);
+        this.score += Math.ceil(1440 / (currT + 1));
         this.addToOpened(flippingCard);
         this.addToOpened(flippedCard);
+
+        this.isOver = this.openedCards.size === this.width * this.height;
         return { secondFlipCorrect: true };
     }
 

@@ -15,3 +15,9 @@ function startTimer(onTick) {
 function stopTimer() {
     clearInterval(timerId);
 }
+
+function resetTimer(onTick) {
+    stopTimer();
+    currT = 0;
+    startTimer(onTick);
+}

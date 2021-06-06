@@ -1,12 +1,37 @@
-// import Game from "./game";
+function fillSelectRange(select, start, end, defaultValue) {
+    for (let optionValue = start; optionValue < end; optionValue++) {
+        const option = document.createElement('option');
 
-// const Game = require('./game');
+        option.value = optionValue;
+        option.innerText = optionValue;
+        if (optionValue === defaultValue) {
+            option.selected = true;
+        }
+        select.append(option);
+    }
+}
 
-const height = 5;
-const width = 4;
+let height;
+let width;
 
-document.documentElement.style.setProperty('--fieldWidth', width.toString());
-document.documentElement.style.setProperty('--fieldHeight', height.toString());
+function setHeight(value) {
+    height = value;
+    document.documentElement.style.setProperty('--fieldHeight', height.toString());
+}
+
+function setWidth(value) {
+    width = value;
+    document.documentElement.style.setProperty('--fieldWidth', width.toString());
+}
+
+setHeight(3);
+setWidth(4);
+
+let game;
+let cards = [];
+
+const timerForm = document.querySelector('#timer');
+const score = document.querySelector('#score');
 
 const backImg = 'images/back.jpg';
 
@@ -37,27 +62,33 @@ function createCard(index, backImg, faceImg) {
     return card;
 }
 
-const game = new Game(height, width);
+function createCards(game, cardTemplates) {
+    const newCards = [];
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const fieldId = game.field[y][x].id;
+            const newCard = cardTemplates[fieldId].cloneNode(true);
 
-const cardsWrapper = document.querySelector('.memoryGame');
+            newCard.dataset.x = x.toString();
+            newCard.dataset.y = y.toString();
+            newCard.addEventListener("mousedown", onCardClick);
 
-const cards = [];
-for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-        const fieldId = game.field[y][x].id;
-        const newCard = cardTemplates[fieldId].cloneNode(true);
+            newCards.push(newCard);
 
-        newCard.dataset.x = x.toString();
-        newCard.dataset.y = y.toString();
-        //newCard.prepend(fieldId.toString());
+            //newCard.prepend(fieldId.toString());
+        }
+    }
+    return newCards;
+}
 
-        cards.push(newCard);
-        cardsWrapper.append(newCard);
+function refillCardWrapper(cards) {
+    const cardWrapper = document.querySelector('.memoryGame');
+    cardWrapper.innerHTML = '';
+
+    for (const card of cards) {
+        cardWrapper.append(card);
     }
 }
-//cardsWrapper.append(...cards);
-
-
 
 function flipCard(x, y) {
     const card = cards[y * width + x];
@@ -68,7 +99,7 @@ function flipCard(x, y) {
     }
 }
 
-const score = document.querySelector('#score');
+
 function onCardClick(e) {
     const card = e.currentTarget;
     console.log(card);
@@ -78,6 +109,11 @@ function onCardClick(e) {
     const flipRes = game.flip(x, y);
     score.value = game.score;
     console.log(flipRes);
+
+    if (game.isOver) {
+        setTimeout(onWin, 200);
+    }
+
     if (flipRes.alreadyFlipped) {
         return;
     }
@@ -100,16 +136,48 @@ function onCardClick(e) {
     throw new Error(`Unknown flip result: ${flipRes}`);
 }
 
-cards.forEach(card => {
-    card.addEventListener("click", onCardClick);
-});
+function onWin() {
+    stopTimer();
+    alert(`You won! Time: ${currT} seconds Score: ${game.score}`);
+}
 
-window.onload = () => {
-    const timerForm = document.querySelector('#timer');
-    startTimer(ts => {
+function startGame() {
+    resetFieldSize();
+
+    game = new Game(height, width);
+    cards = createCards(game, cardTemplates);
+    refillCardWrapper(cards);
+
+    score.value = 0;
+    timerForm.value = '0:00';
+    resetTimer(ts => {
         timerForm.value = `${Math.floor(ts / 60)}:${(ts % 60).toString().padStart(2, '0')}`;
     });
 }
+
+function resetFieldSize() {
+    const newHeight = parseInt(document.querySelector('#heightSelect').value);
+    const newWidth = parseInt(document.querySelector('#widthSelect').value);
+    if (newHeight * newWidth % 2 !== 0) {
+        alert("Can't create correct matching pairs. Height or width should be an even number!");
+        return;
+    }
+    if (newHeight * newWidth > 52) {
+        alert("There are 52 cards currently available! Please select a smaller field.");
+        return;
+    }
+
+    setHeight(newHeight);
+    setWidth(newWidth);
+}
+
+window.onload = () => {
+    fillSelectRange(document.querySelector('#heightSelect'), 1, 10, height);
+    fillSelectRange(document.querySelector('#widthSelect'), 1, 10, width);
+
+    startGame();
+}
+
 
 // <div className="card">
 //     <img src="images/front.png" alt="front" className="front">
