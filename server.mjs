@@ -6,10 +6,15 @@ const port = process.env.PORT || 5000;
 const app = express();
 const server = app.listen(port);
 
-const leaderboard = {};
+const leaderboard = {
+    'karasik': 2000,
+    'olenik': 1010,
+    'yozh': 520,
+    'deerik': 305
+};
 
 app.use(express.static(path.join(process.cwd(), 'client')));
 
-app.get('/', (req, res) => {
-    res.send('Jopa');
-});
+// app.post('/postScore', (req, res) => {
+//     req.
+// })

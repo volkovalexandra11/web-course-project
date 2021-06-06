@@ -39,7 +39,7 @@ export function createCards(game, cardTemplates, onCardClick, height, width) {
             newCard.dataset.y = y.toString();
 
             newCard.addEventListener("mousedown", onCardClick);
-            // newCard.addEventListener('dragstart', () => false );
+            newCard.addEventListener("dragstart", () => false ); // TODO
 
             newCards.push(newCard);
             //newCard.prepend(fieldId.toString());

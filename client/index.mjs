@@ -129,6 +129,7 @@ function resetFieldSize() {
 window.onload = () => {
     fillSelectRange(document.querySelector('#heightSelect'), 1, 10, height);
     fillSelectRange(document.querySelector('#widthSelect'), 1, 10, width);
+    document.querySelector('#restartBtn').addEventListener('click', startGame);
 
     startGame();
 }
