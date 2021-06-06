@@ -6,12 +6,12 @@ import {
     refillCardWrapper,
 } from "./cardGeneration.mjs";
 
-function fillSelectRange(select, start, end, defaultValue) {
+function fillSelectRange(select, start, end, defaultValue, textNoun) {
     for (let optionValue = start; optionValue < end; optionValue++) {
         const option = document.createElement('option');
 
         option.value = optionValue;
-        option.innerText = optionValue;
+        option.innerText = optionValue.toString() + ' ' + textNoun + (optionValue !== 1 ? 's' : '');
         if (optionValue === defaultValue) {
             option.selected = true;
         }
@@ -70,8 +70,7 @@ function onCardClick(e) {
     const card = e.currentTarget;
     const [x, y] = [parseInt(card.dataset.x), parseInt(card.dataset.y)];
     const flipRes = game.flip(x, y);
-    score.value = game.score;
-    score.style.width = (score.value.length * 18 + 3) + 'px';
+    changeScoreTo(game.score);
 
     console.log(flipRes);
 
@@ -174,10 +173,22 @@ function startGame() {
     timer.resetTimer();
 }
 
+function changeScoreTo(newValue) {
+    score.value = newValue;
+    score.style.width = (score.value.length + 1).toString() + 'ch';
+}
+
 window.onload = () => {
-    fillSelectRange(document.querySelector('#heightSelect'), 1, 10, height);
-    fillSelectRange(document.querySelector('#widthSelect'), 1, 10, width);
+    fillSelectRange(document.querySelector('#heightSelect'), 1, 10, height, 'row');
+    fillSelectRange(document.querySelector('#widthSelect'), 1, 10, width, 'column');
     document.querySelector('#restartBtn').addEventListener('click', startGame);
+    document.querySelector('#score').addEventListener('change', e => {
+        console.log(e);
+        console.log(e.target);
+        console.log(e.target.style);
+        console.log(e.target.value);
+        e.target.style.width = (e.target.value.length + 1) + 'ch';
+    });
 
     startGame();
 }
