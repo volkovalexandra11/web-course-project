@@ -4,7 +4,7 @@ import {
     createCardTemplates,
     createCards,
     refillCardWrapper,
-} from "./cardGeneration.mjs";
+} from "./cardGeneration/cardGeneration.mjs";
 
 function fillSelectRange(select, start, end, defaultValue, textNoun) {
     for (let optionValue = start; optionValue < end; optionValue++) {
@@ -32,8 +32,8 @@ function setWidth(value) {
     document.documentElement.style.setProperty('--fieldWidth', width.toString());
 }
 
-setHeight(3);
-setWidth(4);
+setHeight(4);
+setWidth(5);
 
 let game;
 let cards = [];
