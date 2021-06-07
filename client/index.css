@@ -9,6 +9,24 @@
     --fieldHeight: 0;
 }
 
+@media screen and (max-width: 481px) {
+    .fieldHeight,
+    .fieldWidth,
+    .deck,
+    .restart-button,
+    .leader {
+        margin-top: 1px;
+        margin-left: 1px;
+        height: 3px;
+        border: 1px solid #ccc;
+        font-size: 2px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 2px #999;
+        background: #ffe4c4;
+    }
+}
+
+
 .fieldHeight,
 .fieldWidth,
 .deck,
