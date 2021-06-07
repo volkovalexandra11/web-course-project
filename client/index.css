@@ -27,8 +27,8 @@
     }
 
     .card {
-        width: calc(100%/var(--fieldWidth));
-        height: calc(100%/var(--fieldHeight));
+        width: calc(80vw/var(--fieldWidth));
+        height: calc(70vh/var(--fieldHeight));
         margin: 1%;
         transform: scale(1);
         position: relative;
