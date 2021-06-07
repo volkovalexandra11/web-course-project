@@ -35,6 +35,12 @@
         transition: transform 0.5s;
         transform-style: preserve-3d;
     }
+
+    .wrapper {
+        height: calc(70vh - 41px);
+        display: flex;
+        /*background-color: #2a5f3a;*/
+    }
 }
 
 
