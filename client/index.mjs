@@ -48,7 +48,7 @@ const score = document.querySelector('#score');
 let currUser = null;
 
 const deckSizes = {
-    'teachers': 10,
+    'teachers': 12,
     'alphabet': 52,
     'stuff': 20
 };

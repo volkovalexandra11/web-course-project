@@ -5,6 +5,7 @@ export function createTeachersTemplates(fieldSize) {
         'Гейн.jpg',
         'Егоров.jpg',
         'Копейцев.jpg',
+        'Пьянзин.jpg',
         'Самунь.jpg',
         'Филатова.jpg',
     ].slice(0, Math.floor(fieldSize / 2))
