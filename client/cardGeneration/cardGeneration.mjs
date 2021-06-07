@@ -1,11 +1,13 @@
 import {createGradientCardTemplates} from "./gradientCardsGeneration.mjs";
 import {createFiitStuffTemplates} from "./fiitStuffCardsGeneration.mjs";
 import {createAlphabetCardTemplates} from "./alphabeticCardsGeneration.mjs";
+import {createTeachersTemplates} from "./teachersCardsGeneration.mjs";
 
 const templateGenerators = {
     'alphabet': createAlphabetCardTemplates,
     'gradients': createGradientCardTemplates,
-    'stuff': createFiitStuffTemplates
+    'stuff': createFiitStuffTemplates,
+    'teachers': createTeachersTemplates
 };
 
 export const backImg = 'images/back.jpg';
