@@ -9,7 +9,7 @@
     --fieldHeight: 0;
 }
 
-@media screen and (max-width: 481px) {
+@media screen and (max-width: 800px) {
     .fieldHeight,
     .fieldWidth,
     .deck,
