@@ -15,7 +15,7 @@ export function createCardTemplates(deckName, fieldSize) {
 function createAlphabetCardTemplates(fieldSize) {
     return [...'ABCDEFGHIJKLMOPQRSTUVWXYZ']
         .slice(0, Math.floor(fieldSize / 2))
-        .map(letter => `images/${letter}.png`)
+        .map(letter => `images/latin letters/${letter}.png`)
         .map(letterImg => createCard(backImg, letterImg));
 }
 
@@ -79,7 +79,7 @@ function createFiitStuffTemplates(fieldSize) {
             'МАТМЕХ.jpg',
             'ПИТОН.jpg',
         ].slice(0, Math.floor(fieldSize / 2))
-        .map(imgName => 'images/' + imgName)
+        .map(imgName => 'images/fiit stuff/' + imgName)
         .map(faceImg => createCard(backImg, faceImg));
 }
 
